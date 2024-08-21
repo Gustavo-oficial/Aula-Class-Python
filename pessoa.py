@@ -10,7 +10,7 @@ class Pessoa:
         return rendimento
     
 class PessoaFisica(Pessoa):
-    def __init__(self, nome="", rendimento=0.0, endereco=None, cpf="", rg="", dataNascimento=None):
+    def __init__(self, nome="", rendimento=0.0, endereco=None, cpf="", dataNascimento=None):
         if endereco is None:
             endereco = Endereco()
 
@@ -19,7 +19,6 @@ class PessoaFisica(Pessoa):
 
         super().__init__(nome, rendimento, endereco)
 
-        self.rg = rg
         self.cpf = cpf
         self.dataNascimento = dataNascimento
 
@@ -34,13 +33,23 @@ class PessoaFisica(Pessoa):
                 return (rendimento / 100) * 5
 
 class PessoaJuridica(Pessoa):
-    def __init__(self, nome="", rendimento=0.0, endereco=None, cnpj=""):
+    def __init__(self, nome="", rendimento=0.0, cnpj="", endereco=None):
         if endereco is None:
             endereco = Endereco()
 
-        super().__init__(nome, rendimento, endereco)
+        super().__init__(nome, rendimento)
 
         self.cnpj = cnpj
+
+        def calcular_imposto(self, rendimento: float) -> float:
+            if rendimento <= 10000:
+                return 0
+            elif 1500 < rendimento <= 20000:
+                return (rendimento / 100) * 2.5
+            elif 3500 < rendimento <= 40000:
+                return (rendimento / 100) * 5
+            else:
+                return (rendimento / 100) * 10
 
 class Endereco:
     def __init__(self, logradouro="", numero="", endereco_Comercial=""):
